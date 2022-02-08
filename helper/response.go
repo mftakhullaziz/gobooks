@@ -1,33 +1,33 @@
 package helper
 
+import "strings"
+
 type Response struct {
-	Status		bool 	`json:status`
-	message		string	`json:message`
-	Error		interface{}	`json:errors`
-	Data 		interface{}	`json:data`
+	Status  bool        `json:status`
+	Message string      `json:message`
+	Errors  interface{} `json:errors`
+	Data    interface{} `json:data`
 }
 
-type EmptyObj struct {
-
-}
+type EmptyObj struct{}
 
 func BuildResponse(status bool, message string, data interface{}) Response {
-	res := Response {
-		Status: status,
+	res := Response{
+		Status:  status,
 		Message: message,
-		Errors:	nil,
-		Data: data,
+		Errors:  nil,
+		Data:    data,
 	}
 	return res
 }
 
 func BuildErrorResponse(message string, err string, data interface{}) Response {
-	splittedError := string.Split(err, "\n")
-	res := {
-		Status: false,
+	splittedError := strings.Split(err, "\n")
+	res := Response{
+		Status:  false,
 		Message: message,
-		Errors: splittedError,
-		Data: data,
+		Errors:  splittedError,
+		Data:    data,
 	}
 	return res
 }
