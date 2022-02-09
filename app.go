@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/amifth/ApiGo/configuration"
 	"github.com/amifth/ApiGo/controller"
-	"github.com/amifth/ApiGo/middleware"
 	"github.com/amifth/ApiGo/repository"
 	"github.com/amifth/ApiGo/service"
 	"github.com/gin-gonic/gin"
@@ -22,7 +21,7 @@ func main() {
 	defer configuration.CloseDatabaseConnection(db)
 	r := gin.Default()
 
-	authRoutes := r.Group(("api/auth"), middleware.AuthorizeJWT(jwtService))
+	authRoutes := r.Group(("api/auth"))
 	{
 		authRoutes.POST("/login", authController.Login)
 		authRoutes.POST("/register", authController.Register)
