@@ -49,7 +49,12 @@ func (c *authController) Login(ctx *gin.Context) {
 }
 
 func (c *authController) Register(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "hello register",
-	})
+	var registerDTO dto.RegisterDTO
+	errDTO := ctx.ShouldBind(&registerDTO)
+	if errDTO != nil {
+		response := helper.BuildErrorResponse("Failed to process request", errDTO.Error(), helper.EmptyObj{})
+		ctx.AbortWithStatusJSON(http.StatusUnauthorized, response)
+		return
+	}
+	// Check if duplicate email for register
 }
