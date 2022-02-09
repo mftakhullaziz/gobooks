@@ -49,6 +49,10 @@ func (service *authService) CreateUser(user dto.UserCreateDTO) entity.User {
 	return res
 }
 
+func (service *authService) FindByEmail(email string) entity.User {
+	return service.userRepository.FindByEmail(email)
+}
+
 func comparedPassword(hashedPwd string, plainPassword []byte) bool {
 	byteHash := []byte(hashedPwd)
 	err := bcrypt.CompareHashAndPassword(byteHash, plainPassword)
