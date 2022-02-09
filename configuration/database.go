@@ -2,10 +2,12 @@ package configuration
 
 import (
 	"fmt"
+	"os"
+
+	"github.com/amifth/ApiGo/entity"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"os"
 )
 
 func SetupDatabaseConnection() *gorm.DB {
@@ -28,6 +30,8 @@ func SetupDatabaseConnection() *gorm.DB {
 		panic("Failed to create connection to database")
 	}
 
+	// Isi model disini untuk auto migrate ke SQL
+	db.AutoMigrate(&entity.Book{}, &entity.User{})
 	return db
 }
 
