@@ -6,6 +6,7 @@ import (
 	"github.com/amifth/ApiGo/dto"
 	"github.com/amifth/ApiGo/entity"
 	"github.com/amifth/ApiGo/repository"
+	"github.com/mashingan/smapping"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -38,9 +39,14 @@ func (service *authService) VerifyCredential(email string, password string) inte
 	return false
 }
 
-func (service *authService) CreateUser(dto.UserCreateDTO) entity.User {
+func (service *authService) CreateUser(user dto.UserCreateDTO) entity.User {
 	userToCreate := entity.User{}
-	err := 
+	err := smapping.FillStruct(&userToCreate, smapping.MapFields(&user))
+	if err != nil {
+		log.Fatal("Failed map %v", err)
+	}
+	res := service.userRepository.InsertUser(userToCreate)
+	return res
 }
 
 func comparedPassword(hashedPwd string, plainPassword []byte) bool {
