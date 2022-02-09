@@ -43,7 +43,7 @@ func (service *authService) CreateUser(user dto.UserCreateDTO) entity.User {
 	userToCreate := entity.User{}
 	err := smapping.FillStruct(&userToCreate, smapping.MapFields(&user))
 	if err != nil {
-		log.Fatal("Failed map %v", err)
+		log.Fatalf("Failed map %v", err)
 	}
 	res := service.userRepository.InsertUser(userToCreate)
 	return res
@@ -51,6 +51,11 @@ func (service *authService) CreateUser(user dto.UserCreateDTO) entity.User {
 
 func (service *authService) FindByEmail(email string) entity.User {
 	return service.userRepository.FindByEmail(email)
+}
+
+func (service *authService) IsDuplicateEmail(email string) bool {
+	res := service.userRepository.IsDuplicateEmail(email)
+	return !(res.Error == nil)
 }
 
 func comparedPassword(hashedPwd string, plainPassword []byte) bool {
