@@ -57,4 +57,14 @@ func (c *authController) Register(ctx *gin.Context) {
 		return
 	}
 	// Check if duplicate email for register
+	if !c.authService.IsDuplicateEmail(registerDTO.Email) {
+
+	} else {
+		createUser := c.authService.CreateUser(registerDTO)
+		token := c.jwtService.GenerateToken(strconv.FormatUint(createUser.ID, 10))
+		createUser.Token = token
+		response := helper.BuildResponse(true, "Ok!", createUser)
+		ctx.JSON(http.StatusOK, response)
+		return
+	}
 }
