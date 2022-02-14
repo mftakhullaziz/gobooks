@@ -14,7 +14,7 @@ type BookService interface {
 	Insert(b dto.BookCreateDTO) entity.Book
 	Update(b dto.BookUpdateDTO) entity.Book
 	Delete(b entity.Book)
-	All() []entity.User
+	All() []entity.Book
 	FindByID(bookID uint64) entity.Book
 	IsAllowedToEdit(userID string, bookID uint64) bool
 }
@@ -39,7 +39,7 @@ func (service *bookService) Insert(b dto.BookCreateDTO) entity.Book {
 	return res
 }
 
-func (service *bookService) Update(b dto.BookCreateDTO) entity.Book {
+func (service *bookService) Update(b dto.BookUpdateDTO) entity.Book {
 	book := entity.Book{}
 	err := smapping.FillStruct(&book, smapping.MapFields(&b))
 	if err != nil {
@@ -63,6 +63,6 @@ func (service *bookService) FindByID(bookID uint64) entity.Book {
 
 func (service *bookService) IsAllowedToEdit(userID string, bookID uint64) bool {
 	b := service.bookRepository.FindBookByID(bookID)
-	id := fmt.Sprintf("%w", b.UserID)
+	id := fmt.Sprintf("%v", b.UserID)
 	return userID == id
 }
