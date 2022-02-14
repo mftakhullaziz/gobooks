@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/amifth/ApiGo/dto"
 	"github.com/amifth/ApiGo/entity"
 	"github.com/amifth/ApiGo/helper"
 	"github.com/amifth/ApiGo/service"
@@ -52,6 +53,25 @@ func (c *bookController) FindByID(context *gin.Context) {
 	} else {
 		res := helper.BuildResponse(true, "OK!", books)
 		context.JSON(http.StatusOK, res)
+	}
+}
+
+func (c *bookController) Insert(context *gin.Context) {
+	var bookCreateDTO dto.BookCreateDTO
+	errDTO := context.ShouldBind(&bookCreateDTO)
+	if errDTO != nil {
+		res := helper.BuildErrorResponse("Request failed", errDTO.Error(), helper.EmptyObj{})
+		context.JSON(http.StatusBadRequest, res)
+	} else {
+		authHeader := context.GetHeader("Authorization")
+		userID := c.getUserIDByToken(authHeader)
+		convertUserID, err := strconv.ParseUint(userID, 10, 64)
+		if err != nil {
+			bookCreateDTO.UserID = convertUserID
+		}
+		result := c.bookService.Insert(bookCreateDTO)
+		response := helper.BuildResponse(true, "OK!", result)
+		context.JSON(http.StatusOK, response)
 	}
 }
 
