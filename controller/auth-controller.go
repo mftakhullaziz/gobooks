@@ -28,6 +28,16 @@ func NewAuthController(authService service.AuthService, jwtService service.JWTSe
 	}
 }
 
+// Authentication godoc
+// @Summary      login to account
+// @Description  login to your account
+// @Tags         authentication
+// @Accept       json
+// @Produce      json
+// @Param        email    query     string  false  "email"  Format(email)
+// @Param        password    query     string  false  "password"  Format(password)
+// @Success      200  {object}  map[string]interface{}
+// @Router       /auth/login [post]
 func (c *authController) Login(ctx *gin.Context) {
 	var loginDTO dto.LoginDTO
 	errDTO := ctx.ShouldBind(&loginDTO)
@@ -40,7 +50,7 @@ func (c *authController) Login(ctx *gin.Context) {
 	if v, ok := authResult.(entity.User); ok {
 		generatedToken := c.jwtService.GenerateToken(strconv.FormatUint(v.ID, 10))
 		v.Token = generatedToken
-		response := helper.BuildResponse(true, "Ok!", v)
+		response := helper.BuildResponse("200", true, "Successful!", v)
 		ctx.JSON(http.StatusOK, response)
 		return
 	}
@@ -48,6 +58,17 @@ func (c *authController) Login(ctx *gin.Context) {
 	ctx.AbortWithStatusJSON(http.StatusUnauthorized, response)
 }
 
+// Authentication godoc
+// @Summary      register to account
+// @Description  register
+// @Tags         authentication
+// @Accept       json
+// @Produce      json
+// @Param        name    query     string  false  "name"  Format(name)
+// @Param        email    query     string  false  "email"  Format(email)
+// @Param        password    query     string  true  "password"  Format(password)
+// @Success      200  {object}  map[string]interface{}
+// @Router       /auth/register [post]
 func (c *authController) Register(ctx *gin.Context) {
 	var registerDTO dto.RegisterDTO
 	errDTO := ctx.ShouldBind(&registerDTO)
@@ -64,7 +85,7 @@ func (c *authController) Register(ctx *gin.Context) {
 		createUser := c.authService.CreateUser(registerDTO)
 		token := c.jwtService.GenerateToken(strconv.FormatUint(createUser.ID, 10))
 		createUser.Token = token
-		response := helper.BuildResponse(true, "Ok!", createUser)
+		response := helper.BuildResponse("200", true, "Successful!", createUser)
 		ctx.JSON(http.StatusCreated, response)
 	}
 }

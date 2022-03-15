@@ -3,10 +3,13 @@ package main
 import (
 	"github.com/amifth/ApiGo/configuration"
 	"github.com/amifth/ApiGo/controller"
+	_ "github.com/amifth/ApiGo/docs"
 	"github.com/amifth/ApiGo/middleware"
 	"github.com/amifth/ApiGo/repository"
 	"github.com/amifth/ApiGo/service"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"gorm.io/gorm"
 )
 
@@ -23,30 +26,59 @@ var (
 	bookController controller.BookController = controller.NewBookController(bookService, jwtService)
 )
 
+// @title           Apigo - Spec Documentation API
+// @version         1.0
+// @description     This is a sample server celler server.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name   API Support
+// @contact.url    http://www.swagger.io/support
+// @contact.email  support@swagger.io
+
+// @license.name  Apache 2.0
+// @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host      localhost:8080
+// @BasePath  /api/v1
+
+// @securityDefinitions.basic  BasicAuth
 func main() {
 	defer configuration.CloseDatabaseConnection(db)
+
 	r := gin.Default()
 
-	authRoutes := r.Group("api/auth")
+	v1 := r.Group("/api/v1")
 	{
-		authRoutes.POST("/login", authController.Login)
-		authRoutes.POST("/register", authController.Register)
+		authRoutes := v1.Group("/auth")
+		{
+			authRoutes.POST("/login", authController.Login)
+			authRoutes.POST("/register", authController.Register)
+		}
+
+		dataUserRoutes := v1.Group("/user")
+		{
+			dataUserRoutes.GET("/all", userController.AllUser)
+		}
+
+		userRoutes := v1.Group("/user", middleware.AuthorizeJWT(jwtService))
+		{
+			userRoutes.GET("/profile", userController.Profile)
+			userRoutes.PUT("/profile", userController.Update)
+		}
+
+		bookRoutes := v1.Group("/books", middleware.AuthorizeJWT(jwtService))
+		{
+			bookRoutes.GET("/", bookController.All)
+			bookRoutes.POST("/", bookController.Insert)
+			bookRoutes.GET("/:id", bookController.FindByID)
+			bookRoutes.PUT("/:id", bookController.Update)
+			bookRoutes.DELETE("/:id", bookController.Delete)
+		}
 	}
 
-	userRoutes := r.Group("api/user", middleware.AuthorizeJWT(jwtService))
-	{
-		userRoutes.GET("/profile", userController.Profile)
-		userRoutes.PUT("/profile", userController.Update)
-	}
-
-	bookRoutes := r.Group("api/books", middleware.AuthorizeJWT(jwtService))
-	{
-		bookRoutes.GET("/", bookController.All)
-		bookRoutes.POST("/", bookController.Insert)
-		bookRoutes.GET("/:id", bookController.FindByID)
-		bookRoutes.PUT("/:id", bookController.Update)
-		bookRoutes.DELETE("/:id", bookController.Delete)
-	}
+	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/amifth/ApiGo/dto"
 	"github.com/amifth/ApiGo/entity"
+	_users "github.com/amifth/ApiGo/helper"
 	"github.com/amifth/ApiGo/repository"
 	"github.com/mashingan/smapping"
 )
@@ -12,6 +13,7 @@ import (
 type UserService interface {
 	Update(user dto.UserUpdateDTO) entity.User
 	Profile(userID string) entity.User
+	AllUser() *[]_users.UsersResponse
 }
 
 type userService struct {
@@ -36,4 +38,10 @@ func (service *userService) Update(user dto.UserUpdateDTO) entity.User {
 
 func (service *userService) Profile(userID string) entity.User {
 	return service.userRepository.ProfileUser(userID)
+}
+
+func (service *userService) AllUser() *[]_users.UsersResponse {
+	users := service.userRepository.FindAll()
+	users_all := _users.NewUserArrayResponse(users)
+	return &users_all
 }
