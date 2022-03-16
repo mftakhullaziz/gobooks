@@ -66,12 +66,13 @@ func (c *bookController) Insert(context *gin.Context) {
 		authHeader := context.GetHeader("Authorization")
 		userID := c.getUserIDByToken(authHeader)
 		convertUserID, err := strconv.ParseUint(userID, 10, 64)
-		if err != nil {
+		// fmt.Println(convertUserID)
+		if err == nil {
 			bookCreateDTO.UserID = convertUserID
 		}
 		result := c.bookService.Insert(bookCreateDTO)
 		response := helper.BuildResponse("200", true, "Successful!", result)
-		context.JSON(http.StatusOK, response)
+		context.JSON(http.StatusCreated, response)
 	}
 }
 
@@ -135,5 +136,7 @@ func (c *bookController) getUserIDByToken(token string) string {
 		panic(err.Error())
 	}
 	claims := uToken.Claims.(jwt.MapClaims)
-	return fmt.Sprintf("%v", claims["user_id"])
+	fmt.Println(claims)
+	id := fmt.Sprintf("%v", claims["user_id"])
+	return id
 }
