@@ -1,0 +1,133 @@
+basePath: /api/v1
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Apigo - Spec Documentation API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: login to your account
+      parameters:
+      - description: email
+        format: email
+        in: query
+        name: email
+        type: string
+      - description: password
+        format: password
+        in: query
+        name: password
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: login to account
+      tags:
+      - authentication
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: register
+      parameters:
+      - description: name
+        format: name
+        in: query
+        name: name
+        type: string
+      - description: email
+        format: email
+        in: query
+        name: email
+        type: string
+      - description: password
+        format: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: register to account
+      tags:
+      - authentication
+  /user/all:
+    get:
+      consumes:
+      - application/json
+      description: user get all account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: user all account
+      tags:
+      - user
+  /user/profile:
+    put:
+      consumes:
+      - application/json
+      description: user update
+      parameters:
+      - description: Bearer
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: name
+        format: name
+        in: query
+        name: name
+        type: string
+      - description: email
+        format: email
+        in: query
+        name: email
+        type: string
+      - description: password
+        format: password
+        in: query
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: user account
+      tags:
+      - user
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
