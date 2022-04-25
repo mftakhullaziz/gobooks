@@ -3,7 +3,7 @@ package repository
 import (
 	"log"
 
-	"github.com/amifth/ApiGo/entity"
+	"github.com/amifth/apigo-gin/entity"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

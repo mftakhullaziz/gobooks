@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/amifth/ApiGo/dto"
-	"github.com/amifth/ApiGo/entity"
-	"github.com/amifth/ApiGo/helper"
-	"github.com/amifth/ApiGo/service"
+	"github.com/amifth/apigo-gin/dto"
+	"github.com/amifth/apigo-gin/entity"
+	"github.com/amifth/apigo-gin/helper"
+	"github.com/amifth/apigo-gin/service"
 	"github.com/gin-gonic/gin"
 )
 

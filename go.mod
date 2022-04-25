@@ -1,4 +1,4 @@
-module github.com/amifth/ApiGo
+module github.com/amifth/apigo-gin
 
 go 1.17
 

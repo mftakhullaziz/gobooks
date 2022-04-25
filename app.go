@@ -1,12 +1,14 @@
 package main
 
 import (
-	"github.com/amifth/ApiGo/configuration"
-	"github.com/amifth/ApiGo/controller"
-	_ "github.com/amifth/ApiGo/docs"
-	"github.com/amifth/ApiGo/middleware"
-	"github.com/amifth/ApiGo/repository"
-	"github.com/amifth/ApiGo/service"
+	"fmt"
+
+	"github.com/amifth/apigo-gin/configuration"
+	"github.com/amifth/apigo-gin/controller"
+	_ "github.com/amifth/apigo-gin/docs"
+	"github.com/amifth/apigo-gin/middleware"
+	"github.com/amifth/apigo-gin/repository"
+	"github.com/amifth/apigo-gin/service"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -79,6 +81,6 @@ func main() {
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
-
+	fmt.Println("Documentation API : http://localhost:8080/swagger/index.html")
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

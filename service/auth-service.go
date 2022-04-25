@@ -3,9 +3,9 @@ package service
 import (
 	"log"
 
-	"github.com/amifth/ApiGo/dto"
-	"github.com/amifth/ApiGo/entity"
-	"github.com/amifth/ApiGo/repository"
+	"github.com/amifth/apigo-gin/dto"
+	"github.com/amifth/apigo-gin/entity"
+	"github.com/amifth/apigo-gin/repository"
 	"github.com/mashingan/smapping"
 	"golang.org/x/crypto/bcrypt"
 )

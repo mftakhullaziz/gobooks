@@ -3,10 +3,10 @@ package service
 import (
 	"log"
 
-	"github.com/amifth/ApiGo/dto"
-	"github.com/amifth/ApiGo/entity"
-	_users "github.com/amifth/ApiGo/helper"
-	"github.com/amifth/ApiGo/repository"
+	"github.com/amifth/apigo-gin/dto"
+	"github.com/amifth/apigo-gin/entity"
+	_users "github.com/amifth/apigo-gin/helper"
+	"github.com/amifth/apigo-gin/repository"
 	"github.com/mashingan/smapping"
 )
 
