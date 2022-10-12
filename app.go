@@ -64,7 +64,7 @@ func main() {
 
 		userRoutes := v1.Group("/user", middleware.AuthorizeJWT(jwtService))
 		{
-			userRoutes.GET("/profile", userController.Profile)
+			userRoutes.GET("/profile/:id", userController.Profile)
 			userRoutes.PUT("/profile", userController.Update)
 		}
 

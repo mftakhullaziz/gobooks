@@ -14,6 +14,7 @@ type UserService interface {
 	Update(user dto.UserUpdateDTO) entity.User
 	Profile(userID string) entity.User
 	AllUser() *[]_users.UsersResponse
+	FetchById(userID string) entity.User
 }
 
 type userService struct {
@@ -42,6 +43,10 @@ func (service *userService) Profile(userID string) entity.User {
 
 func (service *userService) AllUser() *[]_users.UsersResponse {
 	users := service.userRepository.FindAll()
-	users_all := _users.NewUserArrayResponse(users)
-	return &users_all
+	usersAll := _users.NewUserArrayResponse(users)
+	return &usersAll
+}
+
+func (service *userService) FetchById(userId string) entity.User {
+	return service.userRepository.FindById(userId)
 }

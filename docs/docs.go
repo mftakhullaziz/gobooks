@@ -191,6 +191,47 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+		"/user/profile/:id": {
+            "get": {
+                "description": "user find by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "user account",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+					{
+                        "type": "string",
+                        "format": "userId",
+                        "description": "userId",
+                        "name": "userId",
+                        "in": "query",
+                        "required": true
+                    }
+				],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
         }
     },
     "securityDefinitions": {

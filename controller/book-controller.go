@@ -34,7 +34,7 @@ func NewBookController(bookServ service.BookService, jwtServ service.JWTService)
 }
 
 func (c *bookController) All(context *gin.Context) {
-	var books []entity.Book = c.bookService.All()
+	var books = c.bookService.All()
 	res := helper.BuildResponse("200", true, "Successful!", books)
 	context.JSON(http.StatusOK, res)
 }
@@ -46,7 +46,7 @@ func (c *bookController) FindByID(context *gin.Context) {
 		context.AbortWithStatusJSON(http.StatusBadRequest, res)
 		return
 	}
-	var books entity.Book = c.bookService.FindByID(id)
+	var books = c.bookService.FindByID(id)
 	if (books == entity.Book{}) {
 		res := helper.BuildErrorResponse("Data not found", "no data given id", helper.EmptyObj{})
 		context.JSON(http.StatusNotFound, res)

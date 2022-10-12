@@ -16,6 +16,7 @@ type UserController interface {
 	Update(context *gin.Context)
 	Profile(context *gin.Context)
 	AllUser(context *gin.Context)
+	FetchUserById(context *gin.Context)
 }
 
 type userController struct {
@@ -41,6 +42,18 @@ func NewUserController(userService service.UserService, jwtService service.JWTSe
 // 	}
 // }
 
+// Update User godoc
+// @Summary      user account
+// @Description  user update
+// @Tags         user
+// @Accept       json
+// @Produce      json
+// @Param 		 Authorization header string true "Bearer"
+// @Param        name    query     string  false  "name"  Format(name)
+// @Param        email    query     string  false  "email"  Format(email)
+// @Param        password    query     string  true  "password"  Format(password)
+// @Success      200  {object}  map[string]interface{}
+// @Router       /user/update [put]
 func (c *userController) Update(context *gin.Context) {
 	var userUpdateDTO dto.UserUpdateDTO
 	errDTO := context.ShouldBind(&userUpdateDTO)
@@ -68,16 +81,14 @@ func (c *userController) Update(context *gin.Context) {
 
 // Profile User godoc
 // @Summary      user account
-// @Description  user update
+// @Description  user profile
 // @Tags         user
 // @Accept       json
 // @Produce      json
 // @Param 		 Authorization header string true "Bearer"
-// @Param        name    query     string  false  "name"  Format(name)
-// @Param        email    query     string  false  "email"  Format(email)
-// @Param        password    query     string  true  "password"  Format(password)
+// @Param        userId    query     string  false  "userId"  Format(userId)
 // @Success      200  {object}  map[string]interface{}
-// @Router       /user/profile [put]
+// @Router       /user/profile/:id [get]
 func (c *userController) Profile(context *gin.Context) {
 	authHeader := context.GetHeader("Authorization")
 	token, err := c.jwtService.ValidateToken(authHeader)
@@ -103,4 +114,17 @@ func (c *userController) AllUser(context *gin.Context) {
 	users := c.userService.AllUser()
 	response := helper.BuildResponse("200", true, "Successful!", users)
 	context.JSON(http.StatusOK, response)
+}
+
+func (c *userController) FetchUserById(context *gin.Context) {
+	authHeader := context.GetHeader("Authorization")
+	token, err := c.jwtService.ValidateToken(authHeader)
+	if err != nil {
+		panic(err.Error())
+	}
+	claims := token.Claims.(jwt.MapClaims)
+	id := fmt.Sprintf("%v", claims["user_id"])
+	user := c.userService.FetchById(id)
+	res := helper.BuildResponse("200", true, "Successful!", user)
+	context.JSON(http.StatusOK, res)
 }

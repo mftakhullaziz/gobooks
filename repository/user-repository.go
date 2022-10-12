@@ -16,6 +16,7 @@ type UserRepository interface {
 	FindByEmail(email string) entity.User
 	ProfileUser(userID string) entity.User
 	FindAll() []entity.User
+	FindById(userID string) entity.User
 }
 
 type userConnecttion struct {
@@ -30,7 +31,7 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 
 func (db *userConnecttion) InsertUser(user entity.User) entity.User {
 	user.Password = hashAndSalt([]byte(user.Password))
-	db.connection.Save((&user))
+	db.connection.Save(&user)
 	return user
 }
 
@@ -47,7 +48,7 @@ func (db *userConnecttion) UpdateUser(user entity.User) entity.User {
 	return user
 }
 
-func (db *userConnecttion) VerifyCredential(email string, password string) interface{} {
+func (db *userConnecttion) VerifyCredential(email string, _ string) interface{} {
 	var user entity.User
 	res := db.connection.Where("email = ?", email).Take(&user)
 	if res.Error == nil {
@@ -83,8 +84,14 @@ func hashAndSalt(pwd []byte) string {
 }
 
 func (db *userConnecttion) FindAll() []entity.User {
-	users := []entity.User{}
+	var users []entity.User
 	db.connection.Find(&users)
 	// fmt.Println(users)
 	return users
+}
+
+func (db *userConnecttion) FindById(userId string) entity.User {
+	var user entity.User
+	db.connection.Where("id = ?", userId).Take(&user)
+	return user
 }
