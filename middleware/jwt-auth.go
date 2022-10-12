@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/amifth/apigo-gin/helper"
-	"github.com/amifth/apigo-gin/service"
+	"github.com/amifth/gorest/helper"
+	"github.com/amifth/gorest/service"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )

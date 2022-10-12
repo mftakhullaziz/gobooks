@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/amifth/apigo-gin/entity"
+	"github.com/amifth/gorest/entity"
 	"gorm.io/gorm"
 )
 

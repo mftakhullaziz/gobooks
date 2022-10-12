@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/amifth/apigo-gin/entity"
+	"github.com/amifth/gorest/entity"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

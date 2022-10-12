@@ -3,7 +3,7 @@ package repository
 import (
 	"log"
 
-	"github.com/amifth/apigo-gin/entity"
+	"github.com/amifth/gorest/entity"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
@@ -16,7 +16,6 @@ type UserRepository interface {
 	FindByEmail(email string) entity.User
 	ProfileUser(userID string) entity.User
 	FindAll() []entity.User
-	FindById(userID string) entity.User
 }
 
 type userConnecttion struct {
@@ -88,10 +87,4 @@ func (db *userConnecttion) FindAll() []entity.User {
 	db.connection.Find(&users)
 	// fmt.Println(users)
 	return users
-}
-
-func (db *userConnecttion) FindById(userId string) entity.User {
-	var user entity.User
-	db.connection.Where("id = ?", userId).Take(&user)
-	return user
 }

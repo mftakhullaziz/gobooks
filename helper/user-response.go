@@ -1,6 +1,6 @@
 package helper
 
-import "github.com/amifth/apigo-gin/entity"
+import "github.com/amifth/gorest/entity"
 
 type UsersResponse struct {
 	ID       uint64 `json:"id"`

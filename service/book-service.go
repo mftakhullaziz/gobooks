@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/amifth/apigo-gin/dto"
-	"github.com/amifth/apigo-gin/entity"
-	"github.com/amifth/apigo-gin/repository"
+	"github.com/amifth/gorest/dto"
+	"github.com/amifth/gorest/entity"
+	"github.com/amifth/gorest/repository"
 	"github.com/mashingan/smapping"
 )
 

@@ -3,10 +3,10 @@ package service
 import (
 	"log"
 
-	"github.com/amifth/apigo-gin/dto"
-	"github.com/amifth/apigo-gin/entity"
-	_users "github.com/amifth/apigo-gin/helper"
-	"github.com/amifth/apigo-gin/repository"
+	"github.com/amifth/gorest/dto"
+	"github.com/amifth/gorest/entity"
+	_users "github.com/amifth/gorest/helper"
+	"github.com/amifth/gorest/repository"
 	"github.com/mashingan/smapping"
 )
 
@@ -14,7 +14,6 @@ type UserService interface {
 	Update(user dto.UserUpdateDTO) entity.User
 	Profile(userID string) entity.User
 	AllUser() *[]_users.UsersResponse
-	FetchById(userID string) entity.User
 }
 
 type userService struct {
@@ -45,8 +44,4 @@ func (service *userService) AllUser() *[]_users.UsersResponse {
 	users := service.userRepository.FindAll()
 	usersAll := _users.NewUserArrayResponse(users)
 	return &usersAll
-}
-
-func (service *userService) FetchById(userId string) entity.User {
-	return service.userRepository.FindById(userId)
 }
