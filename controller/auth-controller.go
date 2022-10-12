@@ -28,7 +28,7 @@ func NewAuthController(authService service.AuthService, jwtService service.JWTSe
 	}
 }
 
-// Authentication godoc
+// Login Authentication godoc
 // @Summary      login to account
 // @Description  login to your account
 // @Tags         authentication
@@ -58,7 +58,7 @@ func (c *authController) Login(ctx *gin.Context) {
 	ctx.AbortWithStatusJSON(http.StatusUnauthorized, response)
 }
 
-// Authentication godoc
+// Register Authentication godoc
 // @Summary      register to account
 // @Description  register
 // @Tags         authentication

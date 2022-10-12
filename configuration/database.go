@@ -31,7 +31,10 @@ func SetupDatabaseConnection() *gorm.DB {
 	}
 
 	// Isi model disini untuk auto migrate ke SQL
-	db.AutoMigrate(&entity.Book{}, &entity.User{})
+	err = db.AutoMigrate(&entity.Book{}, &entity.User{})
+	if err != nil {
+		return nil
+	}
 	return db
 }
 
@@ -42,5 +45,8 @@ func CloseDatabaseConnection(db *gorm.DB) {
 		panic("Failed to close connection")
 	}
 
-	SqlDb.Close()
+	err = SqlDb.Close()
+	if err != nil {
+		return
+	}
 }

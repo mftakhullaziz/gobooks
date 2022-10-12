@@ -30,7 +30,7 @@ func NewUserController(userService service.UserService, jwtService service.JWTSe
 	}
 }
 
-//GetUsers ... Get all users
+// GetUsers ... Get all users
 // func (c *userController) GetUsers(context *gin.Context) {
 // 	var user dto.UserUpdateDTO
 // 	err := Models.GetAllUsers(&user)
@@ -66,7 +66,7 @@ func (c *userController) Update(context *gin.Context) {
 	context.JSON(http.StatusOK, res)
 }
 
-// User godoc
+// Profile User godoc
 // @Summary      user account
 // @Description  user update
 // @Tags         user
@@ -91,7 +91,7 @@ func (c *userController) Profile(context *gin.Context) {
 	context.JSON(http.StatusOK, res)
 }
 
-// User godoc
+// AllUser User godoc
 // @Summary      user all account
 // @Description  user get all account
 // @Tags         user
