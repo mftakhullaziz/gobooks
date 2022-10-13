@@ -81,5 +81,9 @@ func main() {
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json") // The url pointing to API definition
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	fmt.Println("Documentation API : http://localhost:8080/swagger/index.html")
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	err := r.Run()
+	if err != nil {
+		return
+	}
+	// listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
