@@ -85,7 +85,8 @@ func (c *userController) Profile(context *gin.Context) {
 	}
 	claims := token.Claims.(jwt.MapClaims)
 	id := fmt.Sprintf("%v", claims["user_id"])
-	user := c.userService.Profile(id)
+	idResult, err := strconv.Atoi(id)
+	user := c.userService.Profile(idResult)
 	res := helper.BuildResponse("200", true, "Successful!", user)
 	context.JSON(http.StatusOK, res)
 }
