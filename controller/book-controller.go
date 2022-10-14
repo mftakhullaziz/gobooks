@@ -105,6 +105,15 @@ func (c *bookController) Insert(context *gin.Context) {
 	}
 }
 
+/*Update Book godoc
+@Summary      user account
+@Description  user update
+@Tags         user
+@Accept       json
+@Produce      json
+@Param 		 Authorization header string true "Bearer"
+@Success      200  {object}  map[string]interface{}
+@Router       /user/update [put]*/
 func (c *bookController) Update(context *gin.Context) {
 	var bookUpdateDTO dto.BookUpdateDTO
 	errDTO := context.ShouldBind(&bookUpdateDTO)
