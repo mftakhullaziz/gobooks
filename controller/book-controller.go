@@ -75,6 +75,16 @@ func (c *bookController) FindByID(context *gin.Context) {
 	}
 }
 
+/*Insert User godoc
+@Summary      book data
+@Description  get book data
+@Tags         book
+@Accept       json
+@Produce      json
+@Param 		  Authorization header string true "Bearer"
+@Param        bookId    query     string  false  "bookId"  Format(bookId)
+@Success      200  {object}  map[string]interface{}
+@Router       /insert/:id [put]*/
 func (c *bookController) Insert(context *gin.Context) {
 	var bookCreateDTO dto.BookCreateDTO
 	errDTO := context.ShouldBind(&bookCreateDTO)
