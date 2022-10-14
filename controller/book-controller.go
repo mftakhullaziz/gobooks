@@ -33,6 +33,15 @@ func NewBookController(bookServ service.BookService, jwtServ service.JWTService)
 	}
 }
 
+/*All Book godoc
+@Summary      book data
+@Description  fetch all book data
+@Tags         book
+@Accept       json
+@Produce      json
+@Param 		  Authorization header string true "Bearer"
+@Success      200  {object}  map[string]interface{}
+@Router       /all [get]*/
 func (c *bookController) All(context *gin.Context) {
 	var books = c.bookService.All()
 	res := helper.BuildResponse("200", true, "Successful!", books)
