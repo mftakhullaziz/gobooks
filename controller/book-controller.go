@@ -168,6 +168,15 @@ func (c *bookController) Delete(context *gin.Context) {
 	}
 }
 
+/*getUserIDByToken Book godoc
+@Summary      book data
+@Description  fetch token book data
+@Tags         book
+@Accept       json
+@Produce      json
+@Param 		  Authorization header string true "Bearer"
+@Success      200  {object}  map[string]interface{}
+@Router       /all [get]*/
 func (c *bookController) getUserIDByToken(token string) string {
 	uToken, err := c.jwtService.ValidateToken(token)
 	if err != nil {
