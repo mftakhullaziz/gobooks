@@ -48,6 +48,16 @@ func (c *bookController) All(context *gin.Context) {
 	context.JSON(http.StatusOK, res)
 }
 
+/*FindByID Book godoc
+@Summary      book data
+@Description  get book data by id
+@Tags         book
+@Accept       json
+@Produce      json
+@Param 		  Authorization header string true "Bearer"
+@Param        bookId    query     string  false  "bookId"  Format(bookId)
+@Success      200  {object}  map[string]interface{}
+@Router       /book/:id [get]*/
 func (c *bookController) FindByID(context *gin.Context) {
 	id, err := strconv.ParseUint(context.Param("id"), 0, 0)
 	if err != nil {
