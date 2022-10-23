@@ -143,6 +143,15 @@ func (c *bookController) Update(context *gin.Context) {
 	}
 }
 
+/*Delete Book godoc
+@Summary      book data
+@Description  delete book data by id
+@Tags         book
+@Accept       json
+@Produce      json
+@Param 		  Authorization header string true "Bearer"
+@Success      200  {object}  map[string]interface{}
+@Router       /books/:id [delete]*/
 func (c *bookController) Delete(context *gin.Context) {
 	var book entity.Book
 	id, err := strconv.ParseUint(context.Param("id"), 0, 0)
