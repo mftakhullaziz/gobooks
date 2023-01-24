@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/amifth/gorest/api"
-	"github.com/amifth/gorest/config"
-	_ "github.com/amifth/gorest/docs"
-	"github.com/amifth/gorest/middleware"
-	"github.com/amifth/gorest/repository"
-	"github.com/amifth/gorest/service"
 	"github.com/gin-gonic/gin"
+	"github.com/mftakhullaziz/gorest/api"
+	"github.com/mftakhullaziz/gorest/config"
+	_ "github.com/mftakhullaziz/gorest/docs"
+	"github.com/mftakhullaziz/gorest/middleware"
+	"github.com/mftakhullaziz/gorest/repository"
+	"github.com/mftakhullaziz/gorest/service"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )

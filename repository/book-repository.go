@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/amifth/gorest/entity"
+	"github.com/mftakhullaziz/gorest/entity"
 	"gorm.io/gorm"
 )
 

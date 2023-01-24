@@ -3,17 +3,17 @@ package service
 import (
 	"log"
 
-	"github.com/amifth/gorest/dto"
-	"github.com/amifth/gorest/entity"
-	_users "github.com/amifth/gorest/helper"
-	"github.com/amifth/gorest/repository"
 	"github.com/mashingan/smapping"
+	"github.com/mftakhullaziz/gorest/dto"
+	"github.com/mftakhullaziz/gorest/entity"
+	"github.com/mftakhullaziz/gorest/helper"
+	"github.com/mftakhullaziz/gorest/repository"
 )
 
 type UserService interface {
 	Update(user dto.UserUpdateDTO) entity.User
 	Profile(userID int) entity.User
-	AllUser() *[]_users.UsersResponse
+	AllUser() *[]helper.UsersResponse
 }
 
 type userService struct {
@@ -40,8 +40,8 @@ func (service *userService) Profile(userID int) entity.User {
 	return service.userRepository.FetchUserById(userID)
 }
 
-func (service *userService) AllUser() *[]_users.UsersResponse {
+func (service *userService) AllUser() *[]helper.UsersResponse {
 	users := service.userRepository.FindAll()
-	usersAll := _users.NewUserArrayResponse(users)
+	usersAll := helper.NewUserArrayResponse(users)
 	return &usersAll
 }

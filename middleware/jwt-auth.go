@@ -4,13 +4,13 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/amifth/gorest/helper"
-	"github.com/amifth/gorest/service"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/mftakhullaziz/gorest/helper"
+	"github.com/mftakhullaziz/gorest/service"
 )
 
-// Authorize JWT validate token user given, return 401 if not valid
+// AuthorizeJWT Authorize JWT validate token user given, return 401 if not valid
 func AuthorizeJWT(jwtServ service.JWTService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")

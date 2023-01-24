@@ -3,10 +3,10 @@ package service
 import (
 	"log"
 
-	"github.com/amifth/gorest/dto"
-	"github.com/amifth/gorest/entity"
-	"github.com/amifth/gorest/repository"
 	"github.com/mashingan/smapping"
+	"github.com/mftakhullaziz/gorest/dto"
+	"github.com/mftakhullaziz/gorest/entity"
+	"github.com/mftakhullaziz/gorest/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

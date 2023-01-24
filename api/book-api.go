@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/amifth/gorest/dto"
-	"github.com/amifth/gorest/entity"
-	"github.com/amifth/gorest/helper"
-	"github.com/amifth/gorest/service"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/mftakhullaziz/gorest/dto"
+	"github.com/mftakhullaziz/gorest/entity"
+	"github.com/mftakhullaziz/gorest/helper"
+	"github.com/mftakhullaziz/gorest/service"
 )
 
 type BookController interface {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/amifth/gorest/entity"
 	"github.com/joho/godotenv"
+	"github.com/mftakhullaziz/gorest/entity"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

@@ -1,4 +1,4 @@
-module github.com/amifth/gorest
+module github.com/mftakhullaziz/gorest
 
 go 1.17
 

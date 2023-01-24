@@ -1,6 +1,6 @@
 package helper
 
-import "github.com/amifth/gorest/entity"
+import "github.com/mftakhullaziz/gorest/entity"
 
 type UsersResponse struct {
 	ID       uint64 `json:"id"`
