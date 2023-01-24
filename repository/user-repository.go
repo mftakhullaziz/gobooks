@@ -19,23 +19,23 @@ type UserRepository interface {
 	DeleteById(userId int) entity.User
 }
 
-type userConnecttion struct {
+type userConnection struct {
 	connection *gorm.DB
 }
 
 func NewUserRepository(db *gorm.DB) UserRepository {
-	return &userConnecttion{
+	return &userConnection{
 		connection: db,
 	}
 }
 
-func (db *userConnecttion) InsertUser(user entity.User) entity.User {
+func (db *userConnection) InsertUser(user entity.User) entity.User {
 	user.Password = hashAndSalt([]byte(user.Password))
 	db.connection.Save(&user)
 	return user
 }
 
-func (db *userConnecttion) UpdateUser(user entity.User) entity.User {
+func (db *userConnection) UpdateUser(user entity.User) entity.User {
 	if user.Password != "" {
 		user.Password = hashAndSalt([]byte(user.Password))
 	} else {
@@ -48,7 +48,7 @@ func (db *userConnecttion) UpdateUser(user entity.User) entity.User {
 	return user
 }
 
-func (db *userConnecttion) VerifyCredential(email string, _ string) interface{} {
+func (db *userConnection) VerifyCredential(email string, _ string) interface{} {
 	var user entity.User
 	res := db.connection.Where("email = ?", email).Take(&user)
 	if res.Error == nil {
@@ -57,18 +57,18 @@ func (db *userConnecttion) VerifyCredential(email string, _ string) interface{} 
 	return nil
 }
 
-func (db *userConnecttion) IsDuplicateEmail(email string) (tx *gorm.DB) {
+func (db *userConnection) IsDuplicateEmail(email string) (tx *gorm.DB) {
 	var user entity.User
 	return db.connection.Where("email = ?", email).Take(&user)
 }
 
-func (db *userConnecttion) FindByEmail(email string) entity.User {
+func (db *userConnection) FindByEmail(email string) entity.User {
 	var user entity.User
 	db.connection.Where("email = ?", email).Take(&user)
 	return user
 }
 
-func (db *userConnecttion) FetchUserById(userID int) entity.User {
+func (db *userConnection) FetchUserById(userID int) entity.User {
 	var user entity.User
 	db.connection.Find(&user, userID)
 	return user
@@ -83,14 +83,14 @@ func hashAndSalt(pwd []byte) string {
 	return string(hash)
 }
 
-func (db *userConnecttion) FindAll() []entity.User {
+func (db *userConnection) FindAll() []entity.User {
 	var users []entity.User
 	db.connection.Find(&users)
 	// fmt.Println(users)
 	return users
 }
 
-func (db *userConnecttion) DeleteById(userId int) entity.User {
+func (db *userConnection) DeleteById(userId int) entity.User {
 	var user entity.User
 	res := db.FetchUserById(userId)
 	db.connection.Delete(&user, userId)

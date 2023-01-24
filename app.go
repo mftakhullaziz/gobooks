@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/amifth/gorest/configuration"
-	"github.com/amifth/gorest/controller"
+	"github.com/amifth/gorest/api"
+	"github.com/amifth/gorest/config"
 	_ "github.com/amifth/gorest/docs"
 	"github.com/amifth/gorest/middleware"
 	"github.com/amifth/gorest/repository"
@@ -15,16 +15,16 @@ import (
 )
 
 var (
-	db             = configuration.SetupDatabaseConnection()
+	db             = config.SetupDatabaseConnection()
 	userRepository = repository.NewUserRepository(db)
 	bookRepository = repository.NewBookRepository(db)
 	jwtService     = service.NewJWTService()
 	userService    = service.NewUserService(userRepository)
 	authService    = service.NewAuthService(userRepository)
 	bookService    = service.NewBookService(bookRepository)
-	authController = controller.NewAuthController(authService, jwtService)
-	userController = controller.NewUserController(userService, jwtService)
-	bookController = controller.NewBookController(bookService, jwtService)
+	authController = api.NewAuthController(authService, jwtService)
+	userController = api.NewUserController(userService, jwtService)
+	bookController = api.NewBookController(bookService, jwtService)
 )
 
 // @title           Apigo - Spec Documentation API
@@ -44,7 +44,7 @@ var (
 
 // @securityDefinitions.basic  BasicAuth
 func main() {
-	defer configuration.CloseDatabaseConnection(db)
+	defer config.CloseDatabaseConnection(db)
 
 	r := gin.Default()
 

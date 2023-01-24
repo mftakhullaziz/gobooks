@@ -1,4 +1,4 @@
-package controller
+package api
 
 import (
 	"fmt"
@@ -33,7 +33,8 @@ func NewBookController(bookServ service.BookService, jwtServ service.JWTService)
 	}
 }
 
-/*All Book godoc
+/*
+All Book godoc
 @Summary      book data
 @Description  fetch all book data
 @Tags         book
@@ -41,14 +42,16 @@ func NewBookController(bookServ service.BookService, jwtServ service.JWTService)
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
 @Success      200  {object}  map[string]interface{}
-@Router       /all [get]*/
+@Router       /all [get]
+*/
 func (c *bookController) All(context *gin.Context) {
 	var books = c.bookService.All()
 	res := helper.BuildResponse("200", true, "Successful!", books)
 	context.JSON(http.StatusOK, res)
 }
 
-/*FindByID Book godoc
+/*
+FindByID Book godoc
 @Summary      book data
 @Description  get book data by id
 @Tags         book
@@ -57,7 +60,8 @@ func (c *bookController) All(context *gin.Context) {
 @Param 		  Authorization header string true "Bearer"
 @Param        bookId    query     string  false  "bookId"  Format(bookId)
 @Success      200  {object}  map[string]interface{}
-@Router       /book/:id [get]*/
+@Router       /book/:id [get]
+*/
 func (c *bookController) FindByID(context *gin.Context) {
 	id, err := strconv.ParseUint(context.Param("id"), 0, 0)
 	if err != nil {
@@ -75,7 +79,8 @@ func (c *bookController) FindByID(context *gin.Context) {
 	}
 }
 
-/*Insert User godoc
+/*
+Insert User godoc
 @Summary      book data
 @Description  get book data
 @Tags         book
@@ -84,7 +89,8 @@ func (c *bookController) FindByID(context *gin.Context) {
 @Param 		  Authorization header string true "Bearer"
 @Param        bookId    query     string  false  "bookId"  Format(bookId)
 @Success      200  {object}  map[string]interface{}
-@Router       /insert/:id [put]*/
+@Router       /insert/:id [put]
+*/
 func (c *bookController) Insert(context *gin.Context) {
 	var bookCreateDTO dto.BookCreateDTO
 	errDTO := context.ShouldBind(&bookCreateDTO)
@@ -105,7 +111,8 @@ func (c *bookController) Insert(context *gin.Context) {
 	}
 }
 
-/*Update Book godoc
+/*
+Update Book godoc
 @Summary      user account
 @Description  user update
 @Tags         user
@@ -113,7 +120,8 @@ func (c *bookController) Insert(context *gin.Context) {
 @Produce      json
 @Param 		 Authorization header string true "Bearer"
 @Success      200  {object}  map[string]interface{}
-@Router       /user/update [put]*/
+@Router       /user/update [put]
+*/
 func (c *bookController) Update(context *gin.Context) {
 	var bookUpdateDTO dto.BookUpdateDTO
 	errDTO := context.ShouldBind(&bookUpdateDTO)
@@ -143,7 +151,8 @@ func (c *bookController) Update(context *gin.Context) {
 	}
 }
 
-/*Delete Book godoc
+/*
+Delete Book godoc
 @Summary      book data
 @Description  delete book data by id
 @Tags         book
@@ -151,7 +160,8 @@ func (c *bookController) Update(context *gin.Context) {
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
 @Success      200  {object}  map[string]interface{}
-@Router       /books/:id [delete]*/
+@Router       /books/:id [delete]
+*/
 func (c *bookController) Delete(context *gin.Context) {
 	var book entity.Book
 	id, err := strconv.ParseUint(context.Param("id"), 0, 0)
@@ -177,7 +187,8 @@ func (c *bookController) Delete(context *gin.Context) {
 	}
 }
 
-/*getUserIDByToken Book godoc
+/*
+getUserIDByToken Book godoc
 @Summary      book data
 @Description  fetch token book data
 @Tags         book
@@ -185,7 +196,8 @@ func (c *bookController) Delete(context *gin.Context) {
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
 @Success      200  {object}  map[string]interface{}
-@Router       /all [get]*/
+@Router       /all [get]
+*/
 func (c *bookController) getUserIDByToken(token string) string {
 	uToken, err := c.jwtService.ValidateToken(token)
 	if err != nil {

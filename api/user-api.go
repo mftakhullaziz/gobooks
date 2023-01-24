@@ -1,4 +1,4 @@
-package controller
+package api
 
 import (
 	"fmt"
@@ -30,7 +30,8 @@ func NewUserController(userService service.UserService, jwtService service.JWTSe
 	}
 }
 
-/*Update User godoc
+/*
+Update User godoc
 @Summary      user account
 @Description  user update
 @Tags         user
@@ -41,7 +42,8 @@ func NewUserController(userService service.UserService, jwtService service.JWTSe
 @Param        email    query     string  false  "email"  Format(email)
 @Param        password    query     string  true  "password"  Format(password)
 @Success      200  {object}  map[string]interface{}
-@Router       /user/update [put]*/
+@Router       /user/update [put]
+*/
 func (c *userController) Update(context *gin.Context) {
 	var userUpdateDTO dto.UserUpdateDTO
 	errDTO := context.ShouldBind(&userUpdateDTO)
@@ -67,7 +69,8 @@ func (c *userController) Update(context *gin.Context) {
 	context.JSON(http.StatusOK, res)
 }
 
-/*Profile User godoc
+/*
+Profile User godoc
 @Summary      user account
 @Description  user profile
 @Tags         user
@@ -76,7 +79,8 @@ func (c *userController) Update(context *gin.Context) {
 @Param 		 Authorization header string true "Bearer"
 @Param        userId    query     string  false  "userId"  Format(userId)
 @Success      200  {object}  map[string]interface{}
-@Router       /user/profile/:id [get]*/
+@Router       /user/profile/:id [get]
+*/
 func (c *userController) Profile(context *gin.Context) {
 	authHeader := context.GetHeader("Authorization")
 	token, err := c.jwtService.ValidateToken(authHeader)
