@@ -65,7 +65,7 @@ func (c *userController) Update(context *gin.Context) {
 	}
 	userUpdateDTO.ID = id
 	u := c.userService.Update(userUpdateDTO)
-	res := helper.BuildResponse("200", true, "Successful!", u)
+	res := helper.BuildResponse(http.StatusCreated, true, _apiCreated, false, u)
 	context.JSON(http.StatusOK, res)
 }
 
@@ -91,7 +91,7 @@ func (c *userController) Profile(context *gin.Context) {
 	id := fmt.Sprintf("%v", claims["user_id"])
 	idResult, err := strconv.Atoi(id)
 	user := c.userService.Profile(idResult)
-	res := helper.BuildResponse("200", true, "Successful!", user)
+	res := helper.BuildResponse(http.StatusOK, true, _apiRequest, false, user)
 	context.JSON(http.StatusOK, res)
 }
 
@@ -107,6 +107,6 @@ AllUser User godoc
 */
 func (c *userController) AllUser(context *gin.Context) {
 	users := c.userService.AllUser()
-	response := helper.BuildResponse("200", true, "Successful!", users)
+	response := helper.BuildResponse(http.StatusOK, true, _apiRequest, false, users)
 	context.JSON(http.StatusOK, response)
 }

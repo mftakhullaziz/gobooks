@@ -5,32 +5,39 @@ import (
 )
 
 type Response struct {
-	Responses string      `json:responses`
-	Status    bool        `json:status`
-	Message   string      `json:message`
-	Errors    interface{} `json:errors`
-	Data      interface{} `json:data`
+	StatusCode int         `json:statusCode`
+	Success    bool        `json:success`
+	Message    string      `json:message`
+	Failed     bool        `json:failed`
+	Data       interface{} `json:data`
+}
+
+type ErrorResponse struct {
+	Success bool        `json:success`
+	Message string      `json:message`
+	Data    interface{} `json:data`
+	Error   interface{} `json:error`
 }
 
 type EmptyObj struct{}
 
-func BuildResponse(responses string, status bool, message string, data interface{}) Response {
+func BuildResponse(statusCode int, success bool, message string, failed bool, data interface{}) Response {
 	res := Response{
-		Responses: responses,
-		Status:    status,
-		Message:   message,
-		Errors:    nil,
-		Data:      data,
+		StatusCode: statusCode,
+		Success:    success,
+		Message:    message,
+		Failed:     failed,
+		Data:       data,
 	}
 	return res
 }
 
-func BuildErrorResponse(message string, err string, data interface{}) Response {
-	splittedError := strings.Split(err, "\n")
-	res := Response{
-		Status:  false,
+func BuildErrorResponse(message string, err string, data interface{}) ErrorResponse {
+	splitError := strings.Split(err, "\n")
+	res := ErrorResponse{
+		Success: false,
 		Message: message,
-		Errors:  splittedError,
+		Error:   splitError,
 		Data:    data,
 	}
 	return res

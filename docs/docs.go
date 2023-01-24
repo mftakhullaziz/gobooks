@@ -247,8 +247,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8080",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "Apigo - Spec Documentation API",
-	Description:      "This is a sample server celler server.",
+	Title:            "Go Rest - Api Documentation",
+	Description:      "Implementation Go Gin and MySql",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
