@@ -249,6 +249,7 @@ const docTemplate = `{
                 "tags": [
                     "Books"
                 ],
+				"summary": "get data books",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -322,6 +323,7 @@ const docTemplate = `{
                 "tags": [
                     "Books"
                 ],
+				"summary": "get data books by id",
                 "parameters": [
                     {
                         "type": "string",
@@ -413,6 +415,7 @@ const docTemplate = `{
                 "tags": [
                     "Books"
                 ],
+				"summary": "delete data books",
                 "parameters": [
                     {
                         "type": "string",
