@@ -158,6 +158,144 @@ paths:
       summary: user account
       tags:
         - User Profile
+  /books/:
+    get:
+      consumes:
+        - application/json
+      description: get data books
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: get data books
+      tags:
+        - Books
+  /books/add/:
+    post:
+      consumes:
+        - application/json
+      description: add data books
+      parameters:
+        - description: title
+          format: title
+          in: query
+          name: title
+          type: string
+          required: true
+        - description: description
+          format: description
+          in: query
+          name: description
+          type: string
+          required: true
+        - description: user_id
+          format: user_id
+          in: query
+          name: user_id
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: add data books
+      tags:
+        - Books
+  /books/fetch/:id:
+    get:
+      consumes:
+        - application/json
+      description: get data books
+      produces:
+        - application/json
+      parameters:
+        - description: id
+          format: id
+          in: query
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: get data books
+      tags:
+        - Books
+  /books/update/:id:
+    put:
+      description: update data books
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      summary: update data books
+      parameters:
+        - description: id
+          format: id
+          in: query
+          name: id
+          type: string
+          required: true
+        - description: title
+          format: title
+          in: query
+          name: title
+          type: string
+          required: true
+        - description: description
+          format: description
+          in: query
+          name: description
+          type: string
+          required: true
+        - description: user_id
+          format: user_id
+          in: query
+          name: user_id
+          type: string
+          required: true
+      responses:
+        "201":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+        - Books
+  /books/delete/:id:
+    delete:
+      consumes:
+        - application/json
+      description: delete data books
+      produces:
+        - application/json
+      parameters:
+        - description: id
+          format: id
+          in: query
+          name: id
+          type: string
+          required: true
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: delete data books
+      tags:
+        - Books
 securityDefinitions:
   BasicAuth:
     type: basic

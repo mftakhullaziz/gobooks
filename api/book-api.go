@@ -26,7 +26,8 @@ type bookController struct {
 	jwtService  service.JWTService
 }
 
-func NewBookController(bookServ service.BookService, jwtServ service.JWTService) BookController {
+func NewBookController(bookServ service.BookService,
+	jwtServ service.JWTService) BookController {
 	return &bookController{
 		bookService: bookServ,
 		jwtService:  jwtServ,
@@ -37,7 +38,7 @@ func NewBookController(bookServ service.BookService, jwtServ service.JWTService)
 All Book godoc
 @Summary      book data
 @Description  fetch all book data
-@Tags         book
+@Tags         Book
 @Accept       json
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
@@ -54,7 +55,7 @@ func (c *bookController) All(context *gin.Context) {
 FindByID Book godoc
 @Summary      book data
 @Description  get book data by id
-@Tags         book
+@Tags         Book
 @Accept       json
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
@@ -83,7 +84,7 @@ func (c *bookController) FindByID(context *gin.Context) {
 Insert User godoc
 @Summary      book data
 @Description  get book data
-@Tags         book
+@Tags         Book
 @Accept       json
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
@@ -115,7 +116,7 @@ func (c *bookController) Insert(context *gin.Context) {
 Update Book godoc
 @Summary      user account
 @Description  user update
-@Tags         user
+@Tags         Book
 @Accept       json
 @Produce      json
 @Param 		 Authorization header string true "Bearer"
@@ -155,7 +156,7 @@ func (c *bookController) Update(context *gin.Context) {
 Delete Book godoc
 @Summary      book data
 @Description  delete book data by id
-@Tags         book
+@Tags         Book
 @Accept       json
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
@@ -191,7 +192,7 @@ func (c *bookController) Delete(context *gin.Context) {
 getUserIDByToken Book godoc
 @Summary      book data
 @Description  fetch token book data
-@Tags         book
+@Tags         Book
 @Accept       json
 @Produce      json
 @Param 		  Authorization header string true "Bearer"
