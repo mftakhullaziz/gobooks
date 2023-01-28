@@ -25,7 +25,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/auth/login": {
+        "/authenticate/signIn": {
             "post": {
                 "description": "login to your account",
                 "consumes": [
@@ -35,7 +35,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authentication"
+                    "Authentication"
                 ],
                 "summary": "login to account",
                 "parameters": [
@@ -44,14 +44,16 @@ const docTemplate = `{
                         "format": "email",
                         "description": "email",
                         "name": "email",
-                        "in": "query"
+                        "in": "query",
+						"required": true
                     },
                     {
                         "type": "string",
                         "format": "password",
                         "description": "password",
                         "name": "password",
-                        "in": "query"
+                        "in": "query",
+						"required": true
                     }
                 ],
                 "responses": {
@@ -65,7 +67,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/auth/register": {
+        "/authenticate/signUp": {
             "post": {
                 "description": "register",
                 "consumes": [
@@ -75,7 +77,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "authentication"
+                    "Authentication"
                 ],
                 "summary": "register to account",
                 "parameters": [
@@ -84,14 +86,16 @@ const docTemplate = `{
                         "format": "name",
                         "description": "name",
                         "name": "name",
-                        "in": "query"
+                        "in": "query",
+						"required": true
                     },
                     {
                         "type": "string",
                         "format": "email",
                         "description": "email",
                         "name": "email",
-                        "in": "query"
+                        "in": "query",
+						"required": true
                     },
                     {
                         "type": "string",
@@ -113,7 +117,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/all": {
+        "/user/": {
             "get": {
                 "description": "user get all account",
                 "consumes": [
@@ -123,7 +127,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Profile"
                 ],
                 "summary": "user all account",
                 "responses": {
@@ -147,7 +151,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Profile"
                 ],
                 "summary": "user account",
                 "parameters": [
@@ -202,7 +206,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Profile"
                 ],
                 "summary": "user account",
                 "parameters": [

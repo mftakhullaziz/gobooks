@@ -34,10 +34,10 @@ func NewUserController(userService service.UserService, jwtService service.JWTSe
 Update User godoc
 @Summary      user account
 @Description  user update
-@Tags         user
+@Tags         User Controller
 @Accept       json
 @Produce      json
-@Param 		 Authorization header string true "Bearer"
+@Param 		  Authorization header string true "Bearer"
 @Param        name    query     string  false  "name"  Format(name)
 @Param        email    query     string  false  "email"  Format(email)
 @Param        password    query     string  true  "password"  Format(password)
@@ -73,10 +73,10 @@ func (c *userController) Update(context *gin.Context) {
 Profile User godoc
 @Summary      user account
 @Description  user profile
-@Tags         user
+@Tags         User Controller
 @Accept       json
 @Produce      json
-@Param 		 Authorization header string true "Bearer"
+@Param 		  Authorization header string true "Bearer"
 @Param        userId    query     string  false  "userId"  Format(userId)
 @Success      200  {object}  map[string]interface{}
 @Router       /user/profile/:id [get]
@@ -99,7 +99,7 @@ func (c *userController) Profile(context *gin.Context) {
 AllUser User godoc
 @Summary      user all account
 @Description  user get all account
-@Tags         user
+@Tags         User Controller
 @Accept       json
 @Produce      json
 @Success      200  {object}  map[string]interface{}

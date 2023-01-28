@@ -26,21 +26,17 @@ var (
 	bookController = api.NewBookController(bookService, jwtService)
 )
 
-// @title           Apigo - Spec Documentation API
+// @title           Go Rest - Spec Documentation API
 // @version         1.0
 // @description     This is a sample server celler server.
 // @termsOfService  http://swagger.io/terms/
-
 // @contact.name   API Support
 // @contact.url    http://www.swagger.io/support
 // @contact.email  support@swagger.io
-
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
-
 // @host      localhost:8080
 // @BasePath  /api/v1
-
 // @securityDefinitions.basic  BasicAuth
 func main() {
 	defer config.CloseDatabaseConnection(db)
@@ -49,15 +45,15 @@ func main() {
 
 	v1 := r.Group("/api/v1")
 	{
-		authRoutes := v1.Group("/auth")
+		authRoutes := v1.Group("/authenticate")
 		{
-			authRoutes.POST("/login", authController.Login)
-			authRoutes.POST("/register", authController.Register)
+			authRoutes.POST("/signIn", authController.Login)
+			authRoutes.POST("/signUp", authController.Register)
 		}
 
 		dataUserRoutes := v1.Group("/user")
 		{
-			dataUserRoutes.GET("/all", userController.AllUser)
+			dataUserRoutes.GET("/", userController.AllUser)
 		}
 
 		userRoutes := v1.Group("/user", middleware.AuthorizeJWT(jwtService))

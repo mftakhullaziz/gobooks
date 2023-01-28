@@ -18,7 +18,7 @@
     "host": "localhost:8080",
     "basePath": "/api/v1",
     "paths": {
-        "/auth/login": {
+        "/authenticate/signIn": {
             "post": {
                 "description": "login to your account",
                 "consumes": [
@@ -28,7 +28,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "authentication"
+                    "Authentication"
                 ],
                 "summary": "login to account",
                 "parameters": [
@@ -37,54 +37,8 @@
                         "format": "email",
                         "description": "email",
                         "name": "email",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "format": "password",
-                        "description": "password",
-                        "name": "password",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": true
-                        }
-                    }
-                }
-            }
-        },
-        "/auth/register": {
-            "post": {
-                "description": "register",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "authentication"
-                ],
-                "summary": "register to account",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "format": "name",
-                        "description": "name",
-                        "name": "name",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "format": "email",
-                        "description": "email",
-                        "name": "email",
-                        "in": "query"
+                        "in": "query",
+                        "required": true
                     },
                     {
                         "type": "string",
@@ -106,7 +60,57 @@
                 }
             }
         },
-        "/user/all": {
+        "/authenticate/signUp": {
+            "post": {
+                "description": "register",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "register to account",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "name",
+                        "description": "name",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "format": "email",
+                        "description": "email",
+                        "name": "email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "format": "password",
+                        "description": "password",
+                        "name": "password",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/user/": {
             "get": {
                 "description": "user get all account",
                 "consumes": [
@@ -116,7 +120,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Profile"
                 ],
                 "summary": "user all account",
                 "responses": {
@@ -140,7 +144,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Profile"
                 ],
                 "summary": "user account",
                 "parameters": [
@@ -195,7 +199,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "user"
+                    "User Profile"
                 ],
                 "summary": "user account",
                 "parameters": [

@@ -31,7 +31,7 @@ func NewAuthController(authService service.AuthService, jwtService service.JWTSe
 // Login Authentication godoc
 // @Summary      login to account
 // @Description  login to your account
-// @Tags         authentication
+// @Tags         Authentication
 // @Accept       json
 // @Produce      json
 // @Param        email    query     string  false  "email"  Format(email)
@@ -61,7 +61,7 @@ func (c *authController) Login(ctx *gin.Context) {
 // Register Authentication godoc
 // @Summary      register to account
 // @Description  register
-// @Tags         authentication
+// @Tags         Authentication
 // @Accept       json
 // @Produce      json
 // @Param        name    query     string  false  "name"  Format(name)

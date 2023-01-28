@@ -13,7 +13,7 @@ info:
   title: Apigo - Spec Documentation API
   version: "1.0"
 paths:
-  /auth/login:
+  /authenticate/signIn:
     post:
       consumes:
       - application/json
@@ -24,11 +24,13 @@ paths:
         in: query
         name: email
         type: string
+        required: true
       - description: password
         format: password
         in: query
         name: password
         type: string
+        required: true
       produces:
       - application/json
       responses:
@@ -39,8 +41,8 @@ paths:
             type: object
       summary: login to account
       tags:
-      - authentication
-  /auth/register:
+      - Authentication
+  /authenticate/signUp:
     post:
       consumes:
       - application/json
@@ -50,11 +52,13 @@ paths:
         format: name
         in: query
         name: name
+        required: true
         type: string
       - description: email
         format: email
         in: query
         name: email
+        required: true
         type: string
       - description: password
         format: password
@@ -63,7 +67,7 @@ paths:
         required: true
         type: string
       produces:
-      - application/json
+      - Application/json
       responses:
         "200":
           description: OK
@@ -73,7 +77,7 @@ paths:
       summary: register to account
       tags:
       - authentication
-  /user/all:
+  /user/:
     get:
       consumes:
       - application/json
@@ -88,7 +92,7 @@ paths:
             type: object
       summary: user all account
       tags:
-      - user
+      - User Profile
   /user/profile:
     put:
       consumes:
@@ -126,7 +130,7 @@ paths:
             type: object
       summary: user account
       tags:
-      - user
+      - User Profile
   /user/profile/:id:
     get:
       consumes:
@@ -153,7 +157,7 @@ paths:
             type: object
       summary: user account
       tags:
-        - user
+        - User Profile
 securityDefinitions:
   BasicAuth:
     type: basic
