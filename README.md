@@ -1,21 +1,19 @@
-## Golang Api Gin Gonic
-    Build API Auths, and Books User Use JWT, SQL, GIN GONIC
-
-### Generate API DOCS
-    pull swagger repo
+# Golang Api Gin Gonic
+#### Generate API Docs
+    get swagger golang
 
     $ go get -v github.com/swaggo/swag/cmd/swag
     $ go get -v github.com/swaggo/gin-swagger
     $ go get -v github.com/swaggo/files
 
     Generate
-    swag init -g main.go_files
+    swag init -g app.go
     
     docs api :
     http://localhost:8080/swagger/index.html#
 
-### API Docs by Postman
+#### API Docs by Postman
     https://documenter.getpostman.com/view/6097899/UVsLT7LB
 
-### List Docs API
+#### List Docs Open API
 ![GOREST](https://github.com/mftakhullaziz/gorest/blob/master/api_documentation/api.png)
