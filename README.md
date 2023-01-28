@@ -16,3 +16,6 @@
 
 ### API Docs by Postman
     https://documenter.getpostman.com/view/6097899/UVsLT7LB
+
+### List Docs API
+![GOREST](https://github.com/mftakhullaziz/gorest/blob/master/api_documentation/api.png)
