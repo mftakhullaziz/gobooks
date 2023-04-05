@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/mftakhullaziz/gorest/api"
 	"github.com/mftakhullaziz/gorest/config"
-	_ "github.com/mftakhullaziz/gorest/docs"
+	_ "github.com/mftakhullaziz/gorest/config/swagger_docs"
+	api "github.com/mftakhullaziz/gorest/handler"
 	"github.com/mftakhullaziz/gorest/middleware"
 	"github.com/mftakhullaziz/gorest/repository"
 	"github.com/mftakhullaziz/gorest/service"
@@ -36,14 +36,14 @@ var (
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 // @host      localhost:8080
-// @BasePath  /api/v1
+// @BasePath  /handler/v1
 // @securityDefinitions.basic  BasicAuth
 func main() {
 	defer config.CloseDatabaseConnection(db)
 
 	r := gin.Default()
 
-	v1 := r.Group("/api/v1")
+	v1 := r.Group("/handler/v1")
 	{
 		authRoutes := v1.Group("/authenticate")
 		{

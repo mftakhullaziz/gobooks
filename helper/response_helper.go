@@ -42,8 +42,3 @@ func BuildErrorResponse(message string, err string, data interface{}) ErrorRespo
 	}
 	return res
 }
-
-// func NewUserArrayResponse(users []entity.User) []Response {
-// 	usersRes := []Response{}
-// 	return usersRes
-// }
