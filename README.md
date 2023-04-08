@@ -16,4 +16,4 @@
     https://documenter.getpostman.com/view/6097899/UVsLT7LB
 
 #### List Docs Open API
-![GOREST](https://github.com/mftakhullaziz/gorest/blob/master/api_documentation/api.png)
+![GOREST](https://github.com/mftakhullaziz/gobooks/blob/master/docs/api.png)
